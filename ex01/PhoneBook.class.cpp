@@ -1,14 +1,10 @@
 #include "./PhoneBook.hpp"
-#include <cstdio>
 
 // Constructor
-PhoneBook::PhoneBook(void)
-{
-	this->_numofContacts = 0;
-	this->_nextIndex = 0;
-};
+PhoneBook::PhoneBook(void) : _numofContacts(0), _nextIndex(0){};
 // Destructor
 PhoneBook::~PhoneBook(void){};
+
 int PhoneBook::getNumOfContacts(void) const
 {
 	return (this->_numofContacts);
@@ -40,18 +36,45 @@ Contact PhoneBook::new_contact(std::string fName, std::string lName,
 };
 void PhoneBook::list_contacts(void) const
 {
+	std::ios init(NULL);
+	init.copyfmt(std::cout);
 	int i;
 	i = 0;
-	printf("%10s|%10s|%10s|%10s\n", "index", "First name", "Last name",
-		"Phone");
+	std::cout << std::setfill('-');
+	std::cout << std::setw(45) << "" << std::endl;
+	std::cout.copyfmt(init);
+	std::cout << "|";
+	std::cout << std::setw(10) << "index";
+	std::cout << "|";
+	std::cout << std::setw(10) << "first name";
+	std::cout << "|";
+	std::cout << std::setw(10) << "last name";
+	std::cout << "|";
+	std::cout << std::setw(10) << "nickname";
+	std::cout << "|" << std::endl;
+	std::cout << std::setfill('-');
+	std::cout << std::setw(45) << "" << std::endl;
+	std::cout.copyfmt(init);
 	while (i < this->getNumOfContacts())
 	{
-		printf("%10d|%10s|%10s|%10s\n", i + 1,
-			truncate(contacts[i].fName).c_str(),
-			truncate(contacts[i].lName).c_str(),
-			truncate(contacts[i].phone).c_str());
+		std::cout << "|";
+		std::cout << std::setw(10) << i + 1;
+		std::cout << "|";
+		std::cout << std::setw(10) << truncate(contacts[i].fName).c_str();
+		std::cout << "|";
+		std::cout << std::setw(10) << truncate(contacts[i].lName).c_str();
+		std::cout << "|";
+		std::cout << std::setw(10) << truncate(contacts[i].phone).c_str();
+		std::cout << "|" << std::endl;
+		// printf("%11d|%11s|%11s|%11s\n", i + 1,
+		// 	truncate(contacts[i].fName).c_str(),
+		// 	truncate(contacts[i].lName).c_str(),
+		// 	truncate(contacts[i].phone).c_str());
 		i++;
 	}
+	std::cout << std::setfill('-');
+	std::cout << std::setw(45) << "" << std::endl;
+	std::cout.copyfmt(init);
 };
 
 void PhoneBook::print_contact(int index) const

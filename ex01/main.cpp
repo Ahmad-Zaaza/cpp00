@@ -1,4 +1,5 @@
 #include "./PhoneBook.hpp"
+#include <string>
 
 int	main(void)
 {
@@ -8,7 +9,9 @@ int	main(void)
 	while (true)
 	{
 		std::cout << "Enter a command:" << std::endl;
-		std::cin >> cmd;
+		std::getline(std::cin, cmd);
+		if (cmd.empty())
+			continue ;
 		if (cmd == "ADD")
 			handle_add(&phonebook);
 		else if (cmd == "SEARCH")
@@ -17,10 +20,9 @@ int	main(void)
 			break ;
 		else
 		{
-			std::cout << "Unknown command provided \
-				Known commands are : ADD \
-				SEARCH and EXIT"
-						<< std::endl;
+			std::cout << "Unknown command provided \n\
+Known commands are : ADD, \
+SEARCH and EXIT" << std::endl;
 		}
 		cmd = "";
 	}

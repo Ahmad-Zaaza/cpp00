@@ -1,20 +1,30 @@
-NAME=phonebook
-CC=g++
-CFLAGS = -Wall -Wextra --std=c++98
+NAME = phonebook
 
+CC = c++
 
-SRCS= PhoneBook.class.cpp add.cpp Contact.class.cpp main.cpp
+INCLUDES = PhoneBook.hpp Contact.hpp 
+
+CFLAGS = -Wall -Werror -Wextra --std=c++98
+
+SRCS = PhoneBook.class.cpp add.cpp Contact.class.cpp main.cpp
+
+OBJS = $(SRCS:.cpp=.o)
+
 
 all: $(NAME)
 
 
-$(NAME): $(SRCS)
-	$(CC) $(CFLAGS) --std=c++98 $(SRCS) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $(NAME)
+
+%.o: %.c $(INCLUDES)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(NAME)
+	rm -f $(OBJS)
 
 fclean: clean
+	rm -f $(NAME)
 
 re: fclean all
 
