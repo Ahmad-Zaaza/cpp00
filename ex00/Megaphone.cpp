@@ -22,14 +22,12 @@ std::size_t strlen(char *string)
 	return (i);
 }
 
-static void	print_word(char *word)
+static void	print_word(std::string word)
 {
-	int	len;
-	int	i;
+	size_t	i;
 
 	i = 0;
-	len = strlen(word);
-	while (i < len)
+	while (i < word.length())
 	{
 		std::cout << capitalize(word[i]);
 		i++;
@@ -38,7 +36,7 @@ static void	print_word(char *word)
 
 int	main(int argc, char **argv)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (argc == 1)
